@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: api
+  name: http-server
+  labels:
+    app: http-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-server
+  template:
+    metadata:
+      namespace: api
+      labels:
+        app: http-server
+    spec:
+      containers:
+        - name: http-server
+          image: ashion89/http-server
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 320m
+              memory: "500Mi"
+            requests:
+                cpu: 120m
+                memory: "300Mi"
+          ports:
+            - containerPort: 111111
+              protocol: TCP
+#          env:
+#            - name: MSSIOT_ENV
+#              value: ${MSSIOT_ENV}

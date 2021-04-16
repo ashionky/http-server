@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: api
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /healthCheck
+    alb.ingress.kubernetes.io/success-codes: "200"
+  name: http-server
+  labels:
+    app: http-server
+spec:
+  ports:
+  - port: 11111
+    name: http-11111
+    targetPort: 11111
+  selector:
+    app: http-server
+  type: NodePort
